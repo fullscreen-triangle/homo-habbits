@@ -1,0 +1,244 @@
+# Homo-Habits Semantic Domain Models Configuration
+# Defines the semantic understanding framework for habit tracking and competency assessment
+
+[meta]
+version = "0.1.0"
+description = "Semantic domain models for homo-habits framework"
+last_updated = "2024-01-01"
+
+# Core habit domains that the monkey tail tracks
+[habit_domains]
+
+[habit_domains.physical_wellness]
+name = "Physical Wellness"
+weight = 0.25
+description = "Physical health, fitness, and bodily habits"
+competency_levels = [
+    "Awareness",      # 0.0-0.2: Basic awareness of physical needs
+    "Occasional",     # 0.2-0.4: Sporadic engagement
+    "Regular",        # 0.4-0.6: Consistent patterns
+    "Optimized",      # 0.6-0.8: Data-driven optimization
+    "Mastery"         # 0.8-1.0: Expert-level understanding and practice
+]
+observable_patterns = [
+    "exercise_frequency",
+    "nutrition_choices", 
+    "sleep_patterns",
+    "stress_management",
+    "recovery_practices"
+]
+semantic_markers = [
+    "consistent_scheduling",
+    "progressive_improvement", 
+    "adaptation_to_feedback",
+    "injury_prevention_awareness",
+    "holistic_approach"
+]
+
+[habit_domains.mental_cognitive]
+name = "Mental & Cognitive Development"
+weight = 0.25
+description = "Learning, thinking patterns, and mental habits"
+competency_levels = [
+    "Reactive",       # 0.0-0.2: Reactive mental patterns
+    "Structured",     # 0.2-0.4: Basic structure and awareness
+    "Strategic",      # 0.4-0.6: Strategic thinking development
+    "Systematic",     # 0.6-0.8: Systematic approach to learning
+    "Metacognitive"   # 0.8-1.0: Meta-cognitive mastery
+]
+observable_patterns = [
+    "learning_consistency",
+    "reading_habits",
+    "problem_solving_approaches",
+    "reflection_practices", 
+    "knowledge_synthesis"
+]
+semantic_markers = [
+    "curiosity_driven_exploration",
+    "connection_making",
+    "pattern_recognition",
+    "critical_thinking",
+    "continuous_improvement_mindset"
+]
+
+[habit_domains.social_relationships]
+name = "Social & Relationships"
+weight = 0.20
+description = "Social connections, communication, and relationship habits"
+competency_levels = [
+    "Isolated",       # 0.0-0.2: Minimal social engagement
+    "Responsive",     # 0.2-0.4: Responsive to others
+    "Proactive",      # 0.4-0.6: Proactive social engagement
+    "Empathetic",     # 0.6-0.8: Emotionally intelligent connections
+    "Leadership"      # 0.8-1.0: Natural leadership and influence
+]
+observable_patterns = [
+    "communication_frequency",
+    "relationship_investment",
+    "conflict_resolution",
+    "empathy_expression",
+    "community_contribution"
+]
+semantic_markers = [
+    "active_listening",
+    "emotional_awareness",
+    "boundary_setting",
+    "mutual_support",
+    "authentic_expression"
+]
+
+[habit_domains.productivity_achievement]
+name = "Productivity & Achievement"
+weight = 0.15
+description = "Work habits, goal achievement, and productivity patterns"
+competency_levels = [
+    "Chaotic",        # 0.0-0.2: Disorganized approach
+    "Structured",     # 0.2-0.4: Basic organization
+    "Efficient",      # 0.4-0.6: Efficient systems
+    "Strategic",      # 0.6-0.8: Strategic optimization
+    "Mastery"         # 0.8-1.0: Flow state mastery
+]
+observable_patterns = [
+    "task_completion_rates",
+    "time_management",
+    "goal_setting_patterns",
+    "priority_identification",
+    "system_optimization"
+]
+semantic_markers = [
+    "deep_work_capability",
+    "distraction_management",
+    "energy_optimization",
+    "outcome_focus",
+    "continuous_refinement"
+]
+
+[habit_domains.creative_expression]
+name = "Creative Expression"
+weight = 0.15
+description = "Creative habits, artistic expression, and innovation patterns"
+competency_levels = [
+    "Consume",        # 0.0-0.2: Primarily consuming creative content
+    "Experiment",     # 0.2-0.4: Basic experimentation
+    "Practice",       # 0.4-0.6: Regular creative practice
+    "Develop",        # 0.6-0.8: Developing unique voice
+    "Innovate"        # 0.8-1.0: Innovative creative expression
+]
+observable_patterns = [
+    "creative_output_frequency",
+    "experimentation_willingness",
+    "skill_development_focus",
+    "feedback_integration",
+    "original_idea_generation"
+]
+semantic_markers = [
+    "divergent_thinking",
+    "aesthetic_sensitivity",
+    "persistent_iteration",
+    "risk_taking_in_expression",
+    "cross_domain_inspiration"
+]
+
+# Cross-domain semantic understanding
+[cross_domain_patterns]
+
+[cross_domain_patterns.integration_indicators]
+# Patterns that indicate high-level integration across domains
+holistic_thinking = { weight = 0.3, description = "Ability to see connections across all life domains" }
+adaptive_learning = { weight = 0.25, description = "Learning from one domain applies to others" }
+balanced_optimization = { weight = 0.2, description = "Optimizing one area without sacrificing others" }
+meta_awareness = { weight = 0.15, description = "Awareness of one's own patterns across domains" }
+sustainable_growth = { weight = 0.1, description = "Long-term sustainable development approach" }
+
+[cross_domain_patterns.conflict_detection]
+# Patterns that indicate potential conflicts between domains
+time_competition = { threshold = 0.7, description = "Domains competing for time resources" }
+value_misalignment = { threshold = 0.6, description = "Domain activities conflicting with core values" }
+energy_depletion = { threshold = 0.8, description = "One domain depleting energy for others" }
+social_friction = { threshold = 0.5, description = "Social expectations creating domain conflicts" }
+
+# Semantic vector computation parameters
+[vector_computation]
+embedding_model = "sentence-transformers/all-MiniLM-L6-v2"
+vector_dimensions = 512
+update_frequency_minutes = 5
+context_window_days = 30
+
+[vector_computation.normalization]
+# Normalization parameters for semantic vectors
+domain_weight_normalization = true
+temporal_decay_factor = 0.95
+confidence_scaling = true
+outlier_detection_threshold = 2.5
+
+[vector_computation.learning]
+# Learning parameters for semantic understanding
+learning_rate = 0.01
+momentum = 0.9
+regularization_factor = 0.001
+batch_size = 32
+
+# Biological Maxwell Demons (BMDs) configuration
+[bmds_configuration]
+
+[bmds_configuration.information_catalysts]
+# Configuration for information catalysts that process semantic meaning
+naming_function_threshold = 0.6
+oscillatory_discretization_frequency = 10.0
+consciousness_awareness_weight = 0.8
+pattern_recognition_sensitivity = 0.7
+
+[bmds_configuration.cross_modal_coordination]
+# Cross-modal semantic coordination
+visual_semantic_weight = 0.3
+auditory_semantic_weight = 0.2
+behavioral_semantic_weight = 0.4
+temporal_semantic_weight = 0.1
+
+# Monkey tail (persistent semantic identity) configuration
+[monkey_tail]
+
+[monkey_tail.persistence]
+# How the semantic identity persists and evolves
+memory_retention_days = 365
+adaptation_rate = 0.05
+forgetting_curve_factor = 0.1
+significance_threshold = 0.7
+
+[monkey_tail.synchronization]
+# Cross-device and cross-platform synchronization
+sync_frequency_minutes = 5
+conflict_resolution_strategy = "latest_wins"
+compression_algorithm = "semantic_aware"
+encryption_enabled = true
+
+[monkey_tail.privacy]
+# Privacy-preserving semantic identity
+differential_privacy_epsilon = 0.1
+noise_injection_level = 0.05
+selective_disclosure_enabled = true
+user_control_granularity = "fine"
+
+# Quality assessment and validation
+[quality_metrics]
+
+[quality_metrics.accuracy]
+# Semantic accuracy measurements
+prediction_accuracy_threshold = 0.8
+pattern_recognition_accuracy = 0.85
+cross_validation_required = true
+human_validation_sampling_rate = 0.1
+
+[quality_metrics.bias_detection]
+# Bias detection and mitigation
+demographic_bias_threshold = 0.05
+cultural_bias_detection = true
+temporal_bias_correction = true
+fairness_metric_target = 0.95
+
+[quality_metrics.consistency]
+# Internal consistency validation
+cross_domain_consistency_threshold = 0.9
+temporal_consistency_window_days = 7
+logical_coherence_requirement = true
+contradiction_detection_enabled = true

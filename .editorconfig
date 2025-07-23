@@ -1,0 +1,138 @@
+# EditorConfig for Homo-Habits
+# Ensures consistent coding styles across different editors and IDEs
+# https://editorconfig.org/
+
+root = true
+
+# Default settings for all files
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Rust files
+[*.rs]
+indent_size = 4
+max_line_length = 120
+
+# Cargo files
+[Cargo.toml]
+indent_size = 4
+
+[Cargo.lock]
+indent_size = 4
+
+# TOML configuration files
+[*.toml]
+indent_size = 4
+
+# JavaScript/TypeScript files
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+max_line_length = 100
+
+# JSON files
+[*.json]
+indent_size = 2
+max_line_length = 120
+
+# YAML files
+[*.{yml,yaml}]
+indent_size = 2
+max_line_length = 120
+
+# Markdown files
+[*.md]
+indent_size = 2
+max_line_length = 120
+trim_trailing_whitespace = false
+
+# HTML files
+[*.html]
+indent_size = 2
+max_line_length = 120
+
+# CSS/SCSS files
+[*.{css,scss,sass}]
+indent_size = 2
+max_line_length = 120
+
+# Shell scripts
+[*.{sh,bash}]
+indent_size = 2
+max_line_length = 120
+
+# Python files (for tooling/scripts)
+[*.py]
+indent_size = 4
+max_line_length = 88
+
+# Dockerfile
+[Dockerfile*]
+indent_size = 2
+
+# Docker Compose
+[docker-compose*.yml]
+indent_size = 2
+
+# Kubernetes manifests
+[*.{k8s.yml,k8s.yaml}]
+indent_size = 2
+
+# SQL files
+[*.sql]
+indent_size = 2
+max_line_length = 120
+
+# Configuration files
+[.env*]
+indent_size = 2
+
+# License files
+[LICENSE*]
+indent_size = 4
+max_line_length = 80
+
+# Makefile
+[{Makefile,*.mk}]
+indent_style = tab
+indent_size = 4
+
+# GitIgnore
+[.gitignore]
+indent_size = 2
+
+# GitHub workflows
+[.github/workflows/*.{yml,yaml}]
+indent_size = 2
+
+# Node.js package files
+[package*.json]
+indent_size = 2
+
+# ESLint config
+[.eslint*]
+indent_size = 2
+
+# Prettier config
+[.prettier*]
+indent_size = 2
+
+# TypeScript config
+[tsconfig*.json]
+indent_size = 2
+
+# Webpack config
+[webpack*.js]
+indent_size = 2
+
+# Rollup config
+[rollup*.js]
+indent_size = 2
+
+# Vite config
+[vite*.{js,ts}]
+indent_size = 2 

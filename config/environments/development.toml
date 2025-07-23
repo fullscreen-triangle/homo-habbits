@@ -1,0 +1,166 @@
+# Homo-Habits Development Configuration
+# This configuration is used for local development environments
+
+[app]
+name = "homo-habits"
+version = "0.1.0"
+environment = "development"
+debug = true
+log_level = "debug"
+
+[server]
+host = "127.0.0.1"
+port = 8080
+max_connections = 100
+timeout_seconds = 30
+cors_origins = ["http://localhost:3000", "chrome-extension://*", "moz-extension://*"]
+
+[database]
+url = "postgres://habits_user:habits_dev_password@localhost:5432/homo_habits"
+max_connections = 10
+min_connections = 1
+acquire_timeout_seconds = 30
+idle_timeout_minutes = 10
+max_lifetime_minutes = 30
+
+[redis]
+url = "redis://localhost:6379"
+max_connections = 10
+timeout_seconds = 5
+ttl_seconds = 3600
+
+[semantic_processing]
+# Core semantic vector processing settings
+vector_dimensions = 512
+competency_threshold = 0.7
+confidence_threshold = 0.8
+update_frequency_seconds = 60
+
+# Domain-specific settings
+[semantic_processing.domains]
+max_domains = 50
+learning_rate = 0.01
+decay_factor = 0.95
+expertise_levels = 5
+
+[semantic_processing.bmds]
+# Biological Maxwell Demons configuration
+oscillation_frequency = 10.0
+naming_threshold = 0.6
+information_catalyst_strength = 1.0
+cross_modal_weight = 0.3
+
+[habit_tracking]
+# Habit observation and tracking
+observation_window_hours = 24
+pattern_detection_threshold = 0.75
+habit_formation_days = 21
+adaptation_rate = 0.1
+
+[habit_tracking.monkey_tail]
+# The semantic identity that follows users
+persistence_duration_days = 365
+sync_frequency_minutes = 5
+compression_ratio = 0.8
+privacy_noise_level = 0.1
+
+[ai_integration]
+# AI platform settings
+timeout_seconds = 30
+max_retries = 3
+rate_limit_per_minute = 60
+
+[ai_integration.platforms]
+openai_enabled = true
+anthropic_enabled = true
+google_enabled = true
+local_models_enabled = true
+
+[ai_integration.context_injection]
+max_context_tokens = 2048
+relevance_threshold = 0.7
+quality_boost_factor = 1.5
+
+[commercial_optimization]
+# Zero-bias commercial matching
+matching_threshold = 0.8
+bias_detection_sensitivity = 0.9
+price_optimization_enabled = true
+satisfaction_tracking = true
+
+[commercial_optimization.zero_bias]
+demographic_neutrality = true
+profit_neutrality = true
+quality_focus_weight = 0.8
+need_alignment_weight = 0.9
+
+[privacy]
+# Privacy-preserving protocols
+ephemeral_identity = true
+selective_disclosure = true
+differential_privacy_epsilon = 0.1
+user_control_granularity = "fine"
+
+[privacy.ecosystem_lock]
+# Two-way ecosystem security
+person_validation = true
+machine_fingerprinting = true
+environment_tracking = true
+dual_requirement_enforcement = true
+
+[privacy.disclosure]
+minimum_necessary = true
+context_filtering = true
+noise_injection = true
+user_permission_required = true
+
+[monitoring]
+# System monitoring and observability
+metrics_enabled = true
+tracing_enabled = true
+health_check_interval_seconds = 30
+performance_logging = true
+
+[monitoring.endpoints]
+prometheus = "http://localhost:9090"
+jaeger = "http://localhost:16686"
+grafana = "http://localhost:3000"
+
+[development]
+# Development-specific settings
+hot_reload = true
+debug_endpoints = true
+test_data_generation = true
+mock_external_apis = false
+verbose_logging = true
+
+[development.browser_extension]
+auto_reload = true
+debug_mode = true
+local_backend = "http://localhost:8080"
+
+[external_apis]
+# External service configurations
+timeout_seconds = 30
+retry_attempts = 3
+
+[external_apis.ai_providers]
+openai_base_url = "https://api.openai.com/v1"
+anthropic_base_url = "https://api.anthropic.com"
+google_base_url = "https://generativelanguage.googleapis.com/v1"
+
+[performance]
+# Performance optimization settings
+cache_enabled = true
+cache_ttl_seconds = 300
+async_processing = true
+batch_size = 100
+worker_threads = 4
+
+[testing]
+# Testing configuration
+unit_tests = true
+integration_tests = true
+benchmark_tests = true
+mock_data = true
+test_database_url = "postgres://habits_user:habits_dev_password@localhost:5432/homo_habits_test" 

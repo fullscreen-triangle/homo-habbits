@@ -1,0 +1,55 @@
+{
+  "name": "homo-habits",
+  "version": "0.1.0",
+  "description": "Semantic digital identity system for habit tracking with monkey tail - Browser Extension",
+  "private": true,
+  "workspaces": [
+    "browser_extension",
+    "mobile_app/shared",
+    "integrations/sdk/javascript"
+  ],
+  "scripts": {
+    "dev": "concurrently \"pnpm run dev:extension\" \"pnpm run dev:backend\"",
+    "dev:extension": "cd browser_extension && pnpm run dev",
+    "dev:backend": "cargo watch -x run",
+    "build": "pnpm run build:extension && pnpm run build:backend",
+    "build:extension": "cd browser_extension && pnpm run build",
+    "build:backend": "cargo build --release",
+    "test": "pnpm run test:extension && cargo test",
+    "test:extension": "cd browser_extension && pnpm run test",
+    "lint": "pnpm run lint:extension && cargo clippy",
+    "lint:extension": "cd browser_extension && pnpm run lint",
+    "format": "cargo fmt && prettier --write \"**/*.{js,ts,json,md}\"",
+    "check": "pnpm run lint && pnpm run test",
+    "setup": "./scripts/dev/setup.sh",
+    "deploy:staging": "./scripts/deploy/staging.sh",
+    "deploy:production": "./scripts/deploy/production.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "concurrently": "^8.2.2",
+    "prettier": "^3.1.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.15.0",
+  "keywords": [
+    "homo-habits",
+    "monkey-tail", 
+    "semantic-identity",
+    "habit-tracking",
+    "ai-optimization",
+    "privacy-preserving",
+    "browser-extension"
+  ],
+  "author": "Homo-Habits Team <team@homo-habits.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/homo-habits/monkey-tail.git"
+  },
+  "homepage": "https://homo-habits.com"
+} 

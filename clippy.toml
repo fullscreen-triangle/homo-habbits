@@ -1,0 +1,203 @@
+# Clippy configuration for Homo-Habits
+# Ensures high code quality and consistency across the project
+
+# Lints to deny (these will cause compilation to fail)
+deny = [
+    "clippy::all",
+    "clippy::pedantic",
+    "clippy::nursery",
+    "clippy::cargo",
+    
+    # Memory safety
+    "clippy::mem_forget",
+    "clippy::mem_replace_with_default",
+    "clippy::mem_replace_with_uninit",
+    
+    # Performance
+    "clippy::inefficient_to_string",
+    "clippy::slow_vector_initialization",
+    "clippy::large_types_passed_by_value",
+    "clippy::redundant_allocation",
+    
+    # Correctness
+    "clippy::clone_on_ref_ptr",
+    "clippy::float_cmp",
+    "clippy::float_cmp_const",
+    "clippy::indexing_slicing",
+    "clippy::integer_arithmetic",
+    "clippy::panic",
+    "clippy::unreachable",
+    "clippy::unwrap_used",
+    "clippy::expect_used",
+    
+    # Style consistency
+    "clippy::string_add",
+    "clippy::string_add_assign",
+    "clippy::str_to_string",
+    "clippy::implicit_clone",
+    
+    # Documentation
+    "clippy::missing_docs_in_private_items",
+    "clippy::missing_panics_doc",
+    "clippy::missing_errors_doc",
+    "clippy::missing_safety_doc",
+    
+    # Security
+    "clippy::print_stdout",
+    "clippy::print_stderr",
+    "clippy::dbg_macro",
+    
+    # Cognitive complexity
+    "clippy::cognitive_complexity",
+    "clippy::too_many_lines",
+    "clippy::type_complexity",
+]
+
+# Lints to warn about (these will show warnings but won't fail compilation)
+warn = [
+    "clippy::todo",
+    "clippy::unimplemented",
+    "clippy::missing_const_for_fn",
+    "clippy::use_self",
+    "clippy::cloned_instead_of_copied",
+    "clippy::explicit_deref_methods",
+    "clippy::explicit_into_iter_loop",
+    "clippy::explicit_iter_loop",
+    "clippy::filter_map_next",
+    "clippy::flat_map_option",
+    "clippy::fn_params_excessive_bools",
+    "clippy::if_not_else",
+    "clippy::implicit_clone",
+    "clippy::implicit_hasher",
+    "clippy::inconsistent_struct_constructor",
+    "clippy::inefficient_to_string",
+    "clippy::large_digit_groups",
+    "clippy::large_stack_arrays",
+    "clippy::let_unit_value",
+    "clippy::linkedlist",
+    "clippy::lossy_float_literal",
+    "clippy::macro_use_imports",
+    "clippy::manual_ok_or",
+    "clippy::map_err_ignore",
+    "clippy::map_flatten",
+    "clippy::map_unwrap_or",
+    "clippy::match_on_vec_items",
+    "clippy::match_same_arms",
+    "clippy::match_wild_err_arm",
+    "clippy::match_wildcard_for_single_variants",
+    "clippy::maybe_infinite_iter",
+    "clippy::mismatched_target_os",
+    "clippy::missing_enforced_import_renames",
+    "clippy::mut_mut",
+    "clippy::mutex_integer",
+    "clippy::needless_borrow",
+    "clippy::needless_continue",
+    "clippy::needless_for_each",
+    "clippy::option_option",
+    "clippy::path_buf_push_overwrite",
+    "clippy::ptr_as_ptr",
+    "clippy::rc_mutex",
+    "clippy::ref_option_ref",
+    "clippy::rest_pat_in_fully_bound_structs",
+    "clippy::same_functions_in_if_condition",
+    "clippy::semicolon_if_nothing_returned",
+    "clippy::single_match_else",
+    "clippy::string_add_assign",
+    "clippy::string_lit_as_bytes",
+    "clippy::string_to_string",
+    "clippy::trait_duplication_in_bounds",
+    "clippy::unimplemented",
+    "clippy::unnested_or_patterns",
+    "clippy::unused_peekable",
+    "clippy::unused_rounding",
+    "clippy::useless_transmute",
+    "clippy::verbose_file_reads",
+    "clippy::zero_sized_map_values",
+]
+
+# Lints to allow (exceptions to the above rules)
+allow = [
+    # Allow for rapid prototyping in development
+    "clippy::module_name_repetitions",  # Sometimes necessary for clarity
+    "clippy::similar_names",            # Can be unavoidable
+    "clippy::too_many_arguments",       # Sometimes necessary for complex functions
+    "clippy::must_use_candidate",       # Can be noisy for internal APIs
+    "clippy::wildcard_imports",         # Sometimes useful for preludes
+    
+    # Allow for specific semantic computing patterns
+    "clippy::cast_precision_loss",      # Needed for ML operations
+    "clippy::cast_possible_truncation", # Needed for array indexing
+    "clippy::cast_sign_loss",          # Needed for dimension calculations
+    
+    # Allow for async patterns
+    "clippy::future_not_send",         # Some futures don't need to be Send
+    
+    # Allow for testing
+    "clippy::unwrap_used",             # Acceptable in tests
+    "clippy::expect_used",             # Acceptable in tests
+    "clippy::panic",                   # Acceptable in tests
+]
+
+# Cognitive complexity threshold
+cognitive-complexity-threshold = 25
+
+# Type complexity threshold
+type-complexity-threshold = 100
+
+# Maximum number of lines in a function
+too-many-lines-threshold = 150
+
+# Maximum number of arguments in a function
+too-many-arguments-threshold = 8
+
+# Threshold for large digit groups
+large-error-threshold = 1000000
+
+# Enum variant name threshold
+enum-variant-name-threshold = 3
+
+# Trivially copy pass by value threshold
+trivial-copy-size-limit = 128
+
+# Blacklisted names (variable names to avoid)
+blacklisted-names = ["foo", "bar", "baz", "quux", "temp", "tmp"]
+
+# Configuration for specific lints
+doc-valid-idents = [
+    "APIs", "API", "AI", "BMD", "BMDs", "CPU", "GPU", "HTTP", "HTTPS", "JSON", "REST", "SDK", "SQL", "UI", "UX", "UUID", "XML",
+    "WebAssembly", "gRPC", "OAuth", "JWT", "CORS", "CSRF", "XSS", "TLS", "SSL", "DNS", "CDN",
+    "MongoDB", "PostgreSQL", "Redis", "SQLite",
+    "AWS", "GCP", "Azure",
+    "Docker", "Kubernetes", "nginx",
+    "GitHub", "GitLab",
+    "OpenAI", "Anthropic", "Google",
+    "Rust", "JavaScript", "TypeScript", "Python", "Go",
+    "homo-habits", "Homo-Habits", "MonkeyTail", "Kwasa-Kwasa"
+]
+
+# Disallowed methods (methods that should not be used)
+disallowed-methods = [
+    { path = "std::env::set_var", reason = "Use proper configuration management instead" },
+    { path = "std::process::exit", reason = "Use proper error handling instead" },
+    { path = "std::panic::catch_unwind", reason = "Avoid panic handling in normal flow" },
+]
+
+# Disallowed types (types that should not be used)
+disallowed-types = [
+    { path = "std::collections::HashMap", reason = "Use IndexMap for deterministic iteration where needed" },
+]
+
+# Allow mixed case for specific items
+allowed-scripts = ["Latin", "Cyrillic", "Arabic", "Hiragana", "Katakana", "Han"]
+
+# Maximum iterations for lint passes
+max-suggested-slice-pattern-length = 3
+
+# Literal representation lints
+literal-representation-threshold = 10
+
+# Single letter variables that are acceptable
+single-char-binding-names-threshold = 4
+
+# Function parameter names that should be avoided
+avoid-breaking-exported-api = true 

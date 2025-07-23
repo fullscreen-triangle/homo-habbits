@@ -1,0 +1,180 @@
+version: '3.8'
+
+services:
+  # Database services
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: homo_habits
+      POSTGRES_USER: habits_user
+      POSTGRES_PASSWORD: habits_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U habits_user -d homo_habits"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Core services
+  semantic_processor:
+    build:
+      context: .
+      dockerfile: backend/services/semantic_processor/Dockerfile
+    environment:
+      - DATABASE_URL=postgres://habits_user:habits_dev_password@postgres:5432/homo_habits
+      - REDIS_URL=redis://redis:6379
+      - RUST_LOG=info
+      - HOMO_HABITS_ENV=development
+    ports:
+      - "3001:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config:ro
+
+  identity_manager:
+    build:
+      context: .
+      dockerfile: backend/services/identity_manager/Dockerfile
+    environment:
+      - DATABASE_URL=postgres://habits_user:habits_dev_password@postgres:5432/homo_habits
+      - REDIS_URL=redis://redis:6379
+      - RUST_LOG=info
+      - HOMO_HABITS_ENV=development
+    ports:
+      - "3002:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config:ro
+
+  ai_integrator:
+    build:
+      context: .
+      dockerfile: backend/services/ai_integrator/Dockerfile
+    environment:
+      - DATABASE_URL=postgres://habits_user:habits_dev_password@postgres:5432/homo_habits
+      - REDIS_URL=redis://redis:6379
+      - RUST_LOG=info
+      - HOMO_HABITS_ENV=development
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+    ports:
+      - "3003:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config:ro
+
+  commercial_optimizer:
+    build:
+      context: .
+      dockerfile: backend/services/commercial_optimizer/Dockerfile
+    environment:
+      - DATABASE_URL=postgres://habits_user:habits_dev_password@postgres:5432/homo_habits
+      - REDIS_URL=redis://redis:6379
+      - RUST_LOG=info
+      - HOMO_HABITS_ENV=development
+    ports:
+      - "3004:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./config:/app/config:ro
+
+  # API Gateway
+  api_gateway:
+    build:
+      context: .
+      dockerfile: backend/api/Dockerfile
+    environment:
+      - DATABASE_URL=postgres://habits_user:habits_dev_password@postgres:5432/homo_habits
+      - REDIS_URL=redis://redis:6379
+      - RUST_LOG=info
+      - HOMO_HABITS_ENV=development
+      - SEMANTIC_PROCESSOR_URL=http://semantic_processor:3000
+      - IDENTITY_MANAGER_URL=http://identity_manager:3000
+      - AI_INTEGRATOR_URL=http://ai_integrator:3000
+      - COMMERCIAL_OPTIMIZER_URL=http://commercial_optimizer:3000
+    ports:
+      - "8080:8080"
+    depends_on:
+      - semantic_processor
+      - identity_manager
+      - ai_integrator
+      - commercial_optimizer
+    volumes:
+      - ./config:/app/config:ro
+
+  # Monitoring and observability
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./config/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=homo_habits_dev
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./config/monitoring/grafana:/etc/grafana/provisioning:ro
+
+  # Development tools
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14268:14268"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+
+volumes:
+  postgres_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  default:
+    name: homo_habits_network 
