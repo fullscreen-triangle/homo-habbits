@@ -1,93 +1,131 @@
 [workspace]
+resolver = "2"
 members = [
     "core/semantic",
+    "core/anti_algorithm",
     "core/identity", 
     "core/bmds",
-    "core/engine",
-    "ai_integration/context_injection",
-    "ai_integration/platforms/openai",
-    "ai_integration/platforms/anthropic", 
-    "ai_integration/platforms/google",
-    "ai_integration/platforms/local_models",
-    "ai_integration/enhancement",
-    "commercial/matching",
-    "commercial/optimization", 
-    "commercial/pricing",
-    "privacy/ephemeral",
-    "privacy/disclosure",
-    "privacy/security",
-    "backend/api",
-    "backend/services/semantic_processor",
-    "backend/services/identity_manager",
-    "backend/services/ai_integrator", 
-    "backend/services/commercial_optimizer",
-    "modeling/multi_model",
-    "modeling/domain_extraction",
-    "modeling/quality_assessment",
-    "modeling/distributed",
-    "turbulance_integration/parser",
-    "turbulance_integration/operations",
-    "turbulance_integration/learning",
-    "tools/semantic_debugger",
-    "tools/performance_profiler",
-    "tools/privacy_auditor",
-    "tools/data_generators"
+    "ai_integration",
+    "commercial", 
+    "privacy",
+    "browser_extension",
+    "mobile_app",
+    "backend",
+    "modeling",
+    "integrations"
 ]
 
 [workspace.package]
-name = "homo-habits"
 version = "0.1.0"
 edition = "2021"
-authors = ["Homo-Habits Team <team@homo-habits.com>"]
-description = "Semantic digital identity system for habit tracking and contextual AI optimization"
+authors = ["Homo-Habits Team"]
 license = "MIT"
 repository = "https://github.com/homo-habits/monkey-tail"
-homepage = "https://homo-habits.com"
-keywords = ["semantic", "identity", "habits", "ai", "privacy"]
-categories = ["web-programming", "science", "authentication"]
 
 [workspace.dependencies]
-# Core dependencies
-tokio = { version = "1.35", features = ["full"] }
+# Async runtime and utilities
+tokio = { version = "1.0", features = ["full"] }
+async-trait = "0.1"
+futures = "0.3"
+
+# Serialization and data handling  
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-uuid = { version = "1.6", features = ["v4", "serde"] }
-chrono = { version = "0.4", features = ["serde"] }
-anyhow = "1.0"
-thiserror = "1.0"
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
-# Async and networking
-reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
-axum = { version = "0.7", features = ["ws", "headers"] }
-tower = { version = "0.4", features = ["full"] }
-tower-http = { version = "0.5", features = ["cors", "trace"] }
-
-# Database and storage  
-sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "uuid", "chrono", "json"] }
-redis = { version = "0.24", features = ["tokio-comp", "json"] }
-
-# Cryptography and privacy
-ring = "0.17"
-rand = "0.8"
-argon2 = "0.5"
-sha2 = "0.10"
-
-# Machine learning and semantic processing
-candle = { git = "https://github.com/huggingface/candle.git", features = ["mkl"] }
-tokenizers = "0.15"
+# Mathematical and scientific computing
 ndarray = "0.15"
 nalgebra = "0.32"
+rand = "0.8"
+rand_distr = "0.4"
+statrs = "0.16"
+num-complex = "0.4"
+num-traits = "0.2"
+approx = "0.5"
+
+# Machine learning and AI
+candle = { git = "https://github.com/huggingface/candle.git", package = "candle-core" }
+candle-nn = { git = "https://github.com/huggingface/candle.git" }
+candle-transformers = { git = "https://github.com/huggingface/candle.git" }
+tokenizers = "0.15"
+
+# Database and storage
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "chrono", "uuid"] }
+redis = { version = "0.24", features = ["tokio-comp"] }
+
+# Web and networking
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+hyper = { version = "0.14", features = ["full"] }
+axum = "0.7"
+
+# Logging and observability
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json"] }
+metrics = "0.22"
+metrics-exporter-prometheus = "0.13"
 
 # Configuration and environment
 config = "0.14"
 dotenvy = "0.15"
 
-# Web and API
-hyper = { version = "1.0", features = ["full"] }
-mime = "0.3"
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
 
-# Testing
+# Performance and concurrency
+rayon = "1.7"
+crossbeam = "0.8"
+parking_lot = "0.12"
+
+# Cryptography and security
+ring = "0.17"
+blake3 = "1.5"
+uuid = { version = "1.6", features = ["v4", "serde"] }
+
+# Time handling
+chrono = { version = "0.4", features = ["serde"] }
+time = "0.3"
+
+# Development and testing
+criterion = { version = "0.5", features = ["html_reports"] }
 proptest = "1.4"
-wiremock = "0.5" 
+tokio-test = "0.4"
+
+[profile.dev]
+opt-level = 1
+debug = true
+split-debuginfo = "unpacked"
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'unwind'
+incremental = true
+codegen-units = 256
+rpath = false
+
+[profile.release]
+opt-level = 3
+debug = false
+debug-assertions = false
+overflow-checks = false
+lto = true
+panic = 'abort'
+incremental = false
+codegen-units = 1
+rpath = false
+
+[profile.test]
+opt-level = 1
+debug = true
+debug-assertions = true
+overflow-checks = true
+incremental = true
+codegen-units = 256
+
+[profile.bench]
+opt-level = 3
+debug = false
+debug-assertions = false
+overflow-checks = false
+lto = true
+incremental = false
+codegen-units = 1 

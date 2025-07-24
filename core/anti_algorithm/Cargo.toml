@@ -1,0 +1,70 @@
+[package]
+name = "anti_algorithm"
+version = "0.1.0"
+edition = "2021"
+authors = ["Homo-Habits Team"]
+description = "Anti-Algorithm Principle: Computational success through intentional failure generation"
+license = "MIT"
+repository = "https://github.com/homo-habits/monkey-tail"
+keywords = ["anti-algorithm", "noise-computation", "femtosecond-processing", "statistical-emergence"]
+categories = ["algorithms", "science", "simulation"]
+
+[dependencies]
+# Core computational dependencies
+tokio = { version = "1.0", features = ["full"] }
+async-trait = "0.1"
+futures = "0.3"
+
+# Mathematical and statistical processing
+ndarray = "0.15"
+rand = "0.8"
+rand_distr = "0.4"
+nalgebra = "0.32"
+statrs = "0.16"
+
+# High-precision numerical computation
+num-complex = "0.4"
+num-traits = "0.2"
+approx = "0.5"
+
+# Quantum computation simulation
+qcompute = { version = "0.1", optional = true }
+
+# Performance and monitoring
+rayon = "1.7"
+crossbeam = "0.8"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+# Serialization and logging
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+[dev-dependencies]
+tokio-test = "0.4"
+proptest = "1.4"
+criterion = "0.5"
+
+[features]
+default = ["quantum", "molecular"]
+quantum = ["qcompute"]
+molecular = []
+femtosecond = []
+full-noise-portfolio = ["quantum", "molecular", "femtosecond"]
+
+[[bench]]
+name = "noise_generation"
+harness = false
+
+[[bench]]
+name = "statistical_emergence"
+harness = false
+
+[[bench]]
+name = "anti_algorithm_performance"
+harness = false 
