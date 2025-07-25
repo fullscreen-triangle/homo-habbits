@@ -31,6 +31,9 @@ pub mod solver;
 pub mod femtosecond;
 pub mod convergence;
 
+// NEW: S-Entropy Framework Integration
+pub mod s_entropy;
+
 // Re-export core types for easy access
 pub use types::{
     AntiAlgorithmError, AntiAlgorithmResult, SolutionCandidate, NoisePattern,
@@ -60,6 +63,13 @@ pub use femtosecond::{
 pub use convergence::{
     ConvergenceEngine, StatisticalConvergence, SolutionExtractor,
     PerformanceMetrics, NoiseAmplification
+};
+
+// NEW: S-Entropy Framework exports
+pub use s_entropy::{
+    SEntropyFramework, TriDimensionalS, SEntropyNavigator,
+    RidiculousSolutionGenerator, GlobalSViabilityChecker,
+    EntropyEndpointDetector, AtomicOscillatorProcessor
 };
 
 /// The fundamental constant representing the minimum noise generation rate
