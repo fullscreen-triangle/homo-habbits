@@ -27,6 +27,12 @@ pub mod viability_checker;
 pub mod endpoint_detector;
 pub mod oscillator_processor;
 
+// NEW: Neurolinguistic integration based on research insights
+pub mod neurolinguistic_integration;
+
+// NEW: BMD-S-Entropy consciousness integration - revolutionary breakthrough!
+pub mod bmd_consciousness_integration;
+
 use crate::types::{AntiAlgorithmResult, SolutionCandidate};
 use crate::solver::AntiAlgorithmSolver;
 use async_trait::async_trait;
@@ -46,7 +52,21 @@ pub use viability_checker::GlobalSViabilityChecker;
 pub use endpoint_detector::EntropyEndpointDetector;
 pub use oscillator_processor::AtomicOscillatorProcessor;
 
-/// Main S-Entropy Framework coordinator that integrates with Anti-Algorithm solver
+// NEW: Neurolinguistic integration exports
+pub use neurolinguistic_integration::{
+    NeurolinguisticSEntropyIntegration, DiscourseEntropyAnalyzer,
+    AssociativeMemoryModeler, ConnectivityParadoxResolver,
+    DisorganizationAnalysisResult, ParadoxResolutionResult
+};
+
+// NEW: BMD consciousness integration exports - THE BREAKTHROUGH!
+pub use bmd_consciousness_integration::{
+    BMDSEntropyConsciousness, BMDFrameSelector, CognitiveSpaceNavigator,
+    CognitiveFrame, FrameType, ExperienceContext, ConsciousExperienceResult,
+    NoMemoryDemonstration, CrossbarDemonstration, CrossbarScenario
+};
+
+/// Main S-Entropy Framework coordinator that integrates with Anti-Algorithm
 pub struct SEntropyFramework {
     /// Tri-dimensional alignment engine
     alignment_engine: Arc<RwLock<TriDimensionalAlignmentEngine>>,
